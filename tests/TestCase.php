@@ -1,10 +1,10 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace ShamarKellman\Settings\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use ShamarKellman\Settings\SettingsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,24 +13,33 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'ShamarKellman\\Setting\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
-            SkeletonServiceProvider::class,
+            SettingsServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        $config = config();
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+        $config->set('app.debug', true);
+
+        $config->set('database.connections.orchid', [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ]);
+
+        $config->set('scout.driver', 'array');
+        $config->set('database.default', 'orchid');
+
+        include_once __DIR__.'/../database/migrations/create_settings_table.php.stub';
+        (new \CreateSettingsTable())->up();
     }
 }

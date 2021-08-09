@@ -1,24 +1,26 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "shamarkellman/orchid-settings",
+    "description": "This is my package Settings",
     "keywords": [
-        ":vendor_name",
+        "ShamarKellman",
         "laravel",
-        "package_slug"
+        "orchid-settings"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/shamarkellman/orchid-settings",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Shamar Kellman",
+            "email": "shamarkellman@hotmail.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.4",
         "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.37"
+        "illuminate/contracts": "^8.37",
+        "orchid/platform":"^10.0.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",
@@ -30,13 +32,16 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
-        }
+            "ShamarKellman\\Settings\\": "src",
+            "ShamarKellman\\Settings\\Database\\Factories\\": "database/factories"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "ShamarKellman\\Settings\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,11 +55,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
-            }
+                "ShamarKellman\\Settings\\SettingsServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
