@@ -10,7 +10,8 @@ use Orchid\Screen\AsMultiSource;
 
 class Setting extends Model
 {
-    use Filterable, AsMultiSource;
+    use Filterable;
+    use AsMultiSource;
 
     public const CACHE_PREFIX = 'settings-';
 
@@ -22,14 +23,14 @@ class Setting extends Model
 
     protected $primaryKey = 'key';
 
-	protected $fillable = [
-		'key',
+    protected $fillable = [
+        'key',
         'value',
         'options',
     ];
 
-	protected $casts = [
-        'key' =>'string',
+    protected $casts = [
+        'key' => 'string',
         'value' => 'array',
         'options' => 'array',
     ];
@@ -83,7 +84,7 @@ class Setting extends Model
      */
     public function get($key, $default = null)
     {
-        if (!$this->cache) {
+        if (! $this->cache) {
             return $this->getNoCache($key, $default);
         }
 

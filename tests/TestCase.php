@@ -31,9 +31,9 @@ class TestCase extends Orchestra
         $config->set('app.debug', true);
 
         $config->set('database.connections.orchid', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
 
         $config->set('scout.driver', 'array');

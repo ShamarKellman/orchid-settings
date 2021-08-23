@@ -3,12 +3,12 @@
 namespace ShamarKellman\Settings\Screens;
 
 use Illuminate\Http\RedirectResponse;
-use Orchid\Screen\Actions\Link;
-use Orchid\Support\Facades\Alert;
-use Orchid\Screen\LayoutFactory;
-use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Screen;
 use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\LayoutFactory;
+use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Alert;
 use ShamarKellman\Settings\Layouts\SettingEditLayout;
 use ShamarKellman\Settings\Models\Setting;
 
@@ -22,7 +22,7 @@ class SettingEdit extends Screen
 
     public function query(Setting $setting = null): array
     {
-        if (!$setting->exists) {
+        if (! $setting->exists) {
             $setting = new Setting();
             $this->edit = false;
             $this->name = __('New setting');
@@ -30,7 +30,7 @@ class SettingEdit extends Screen
         } else {
             $this->edit = true;
             $this->name = __(`Edit setting {$setting->key}`);
-            if (!is_null($setting->options['title'])) {
+            if (! is_null($setting->options['title'])) {
                 $this->description = $setting->options['title'];
             }
         }
@@ -49,12 +49,12 @@ class SettingEdit extends Screen
         ];
     }
 
-    public function layout() : array
+    public function layout(): array
     {
         return [
             LayoutFactory::columns([
                 'EditSetting' => [
-                    new SettingEditLayout($this->edit)
+                    new SettingEditLayout($this->edit),
                 ],
             ]),
         ];

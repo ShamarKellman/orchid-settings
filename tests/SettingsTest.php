@@ -65,6 +65,7 @@ class SettingsTest extends TestCase
         $this->setting->set('cache-key', 'new');
         $this->assertStringContainsString('new', $this->setting->get('cache-key'));
     }
+
     /**
      * @dataProvider notExistValues
      *

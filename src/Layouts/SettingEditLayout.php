@@ -48,7 +48,7 @@ class SettingEditLayout extends Rows
                 ->title(__('Type')),
         ];
 
-        if (!is_null($this->query->getContent('setting.options.type'))) {
+        if (! is_null($this->query->getContent('setting.options.type'))) {
             $type = $this->query->getContent('setting.options.type');
         } elseif (is_array($this->query->getContent('setting.value'))) {
             $type = 'code';
@@ -66,25 +66,30 @@ class SettingEditLayout extends Rows
                 $fields['value'] = Picture::make('setting.value.value')
                     ->width($this->query->getContent('setting.value.width') ?? 500)
                     ->height($this->query->getContent('setting.value.height') ?? 300);
+
                 break;
             case 'code':
                 $fields['value'] = Code::make('setting.value')
                     ->language('json')
                     ->title(__('Value code'));
+
                 break;
             case 'codejs':
                 $fields['value'] = Code::make('setting.value')
                     ->language('js')
                     ->title(__('Value code'));
+
                 break;
             case 'textarea':
                 $fields['value'] = TextArea::make('setting.value')
                     ->title(__('Value'));
+
                 break;
             default:
                 $fields['value'] = Input::make('setting.value')
                     ->title(__('Value'));
         }
+
         return $fields;
     }
 }
